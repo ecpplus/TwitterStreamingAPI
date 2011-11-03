@@ -27,9 +27,9 @@ class Tweet < ActiveRecord::Base
 
     def create_from_json(status)
       create(
-        :user_id => status['user']['id'],
-        :twitter_post_id => status['id'],
-        :text => status['text'],
+        :user_id             => status['user']['id'],
+        :twitter_post_id     => status['id'],
+        :text                => status['text'],
         :in_reply_to_user_id => status['in_reply_to_user_id']
       )
     end
