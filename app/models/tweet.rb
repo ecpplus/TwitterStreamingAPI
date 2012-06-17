@@ -24,9 +24,32 @@ class Tweet
           response.read_body do |body|
             body.each_line("\r") do |line|
               status = JSON.parse(line) rescue next
-              next unless status['text']
-              p status['text'] if status['text'] =~ /(?:\p{Hiragana}|\p{Katakana}|[一-龠々])/
-              #create_from_json(status)
+              next if status['text'].blank?
+              if status['text'] =~ /(?:\p{Hiragana}|\p{Katakana}|[一-龠々])/
+                pn = {p:0, n:0}
+                Word.positive_words.each do |word|
+                  if status['text'] =~ /#{word}/
+                    pn[:p] += 1
+                    #p "p:#{word}"
+                  end
+                end
+                Word.negative_words.each do |word|
+                  if status['text'] =~ /#{word}/
+                    pn[:n] += 1 
+                    #p "n:#{word}"
+                  end
+                end
+                if 0 < pn[:n] + pn[:p]
+                  #p status['text']
+                  p pn
+                  TweetScore.create!(
+                    positive: pn[:p], 
+                    negative: pn[:n],
+                    created_at: Time.parse(status['created_at'])
+                  )
+                end
+                #create_from_json(status)
+              end
             end
           end
         end
