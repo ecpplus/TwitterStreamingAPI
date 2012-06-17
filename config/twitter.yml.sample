@@ -1,0 +1,5 @@
+development:
+  twitter_streaming_url: https://stream.twitter.com/1/statuses/sample.json?delimited=length
+  twitter_username:      USERNAME
+  twitter_password:      PASSWORD
+
