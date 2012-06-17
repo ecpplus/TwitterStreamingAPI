@@ -1,6 +1,9 @@
 development:
-  host: localhost
-  database: twitter_algo_development
+  sessions:
+    default:
+      database: twitter_algo_development
+      hosts:
+        - localhost:27017
 
 test:
   host: localhost
