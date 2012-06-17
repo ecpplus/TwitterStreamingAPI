@@ -179,7 +179,7 @@ DEPENDENCIES
   guard-rspec
   guard-spork
   jquery-rails
-  mongoid (~> 3.0.0.rc)
+  mongoid
   rails (= 3.2.6)
   rb-fsevent
   rspec-rails
