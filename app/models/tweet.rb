@@ -28,20 +28,20 @@ class Tweet
               if status['text'] =~ /(?:\p{Hiragana}|\p{Katakana}|[一-龠々])/
                 pn = {p:0, n:0}
                 Word.positive_words.each do |word|
-                  if status['text'] =~ /#{word}/
+                  if status['text'] =~ word # /#{word}/
                     pn[:p] += 1
                     #p "p:#{word}"
                   end
                 end
                 Word.negative_words.each do |word|
-                  if status['text'] =~ /#{word}/
+                  if status['text'] =~ word #/#{word}/
                     pn[:n] += 1 
                     #p "n:#{word}"
                   end
                 end
                 if 0 < pn[:n] + pn[:p]
                   #p status['text']
-                  p pn
+                  #p pn
                   TweetScore.create!(
                     positive: pn[:p], 
                     negative: pn[:n],
